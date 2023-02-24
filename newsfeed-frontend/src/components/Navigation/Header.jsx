@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { Form, Button, Nav, Navbar, NavLink, NavbarBrand } from "react-bootstrap";
 
@@ -9,6 +9,8 @@ import axiosClient from "../../axios-client";
 
 const Header = () => {
     const { user, setUser, token, setToken, setSearchQuery, setFilterCategory } = useStateContext();
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
 
     // LOGOUT HANDLER
     const logoutHandler = (event) => {
@@ -33,12 +35,13 @@ const Header = () => {
     const searchHandler = () => {
         if (!searchIsValid) return;
         setSearchQuery(search);
-        // searchReset();
+        navigate('/');
     };
 
     const homeClickHandler = () => {
         setSearchQuery('');
         setFilterCategory('');
+        navigate('/');
     }
 
     return (
@@ -76,7 +79,7 @@ const Header = () => {
                     </Nav>
 
                     {/* SEARCH BAR */}
-                    {token && (
+                    {token && pathname !== '/settings' && (
                         <div className="d-flex">
                             <Form.Control
                                 type="search"
