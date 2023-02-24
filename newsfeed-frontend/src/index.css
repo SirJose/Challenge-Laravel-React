@@ -1,0 +1,13 @@
+body {
+    color: rgb(181 181 189);
+    background-color: #171923;
+}
+
+.filters {
+    background-color: #2d333b;
+}
+
+.sidebar {
+    background-color: #2d333b;
+    height: calc(100vh - 56px);
+}

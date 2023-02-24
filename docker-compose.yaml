@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  server:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: dockerfiles/backend.dockerfile
+    command: 'php artisan serve --host=0.0.0.0'
+    ports:
+      - '8000:8000'
+  app:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: dockerfiles/frontend.dockerfile
+    ports:
+      - '80:80'
+    depends_on:
+      - server
